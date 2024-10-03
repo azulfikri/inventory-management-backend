@@ -4,9 +4,15 @@ async function createUser(userData) {
     try {
         const newUser = await prisma.user.create({ data: userData});
         return newUser;
-    } catch {
+    } catch (error) {
         throw new Error("Failed to create user in repository")
     }
 }
 
-module.exports = { createUser };
+// module.exports = { createUser };
+
+async function findUserByUsername(username) {
+    return prisma.user.findUnique({ where: {username}});
+}
+
+module.exports = {createUser, findUserByUsername};
