@@ -1,18 +1,18 @@
-const express = require('express')
+const express = require("express");
 const cors = require("cors");
-const app = express()
-const dotenv = require('dotenv')
+const app = express();
+const dotenv = require("dotenv");
 dotenv.config();
-const adminAuthorization = require("./middleware/adminAuthorization")
+const adminAuthorization = require("./middleware/adminAuthorization");
 
-const PORT = process.env.PORT;
+// const PORT = process.env.PORT;
 
 app.use(express.json());
 app.use(cors());
 
 app.get("/", (req, res) => {
-    res.send("Hello There!")
-})
+  res.send("Hello There!");
+});
 
 const authController = require("./auth/auth.controller");
 const itemController = require("./item/item.controller");
@@ -23,6 +23,8 @@ app.use("/api/items", itemController);
 app.use("/api/users", adminAuthorization, userController);
 app.use("/api/transactions", transactionController);
 
-app.listen(PORT, () => {
-    console.log('App Listening on port' + PORT)
-})
+// app.listen(PORT, () => {
+//     console.log('App Listening on port' + PORT)
+// })
+
+export default app;
